@@ -1,5 +1,8 @@
 export type DocumentStatus = 'processing' | 'ready' | 'error'
 
+export type TaskStatus = 'todo' | 'in-progress' | 'done'
+export type TaskPriority = 'low' | 'medium' | 'high'
+
 export interface User {
   id: string
   email: string
@@ -34,4 +37,20 @@ export interface RegisterCredentials {
 export interface AuthResponse {
   user: User
   token: string
+}
+
+
+export interface Task {
+  id: string
+  title: string
+  description?: string
+  status: TaskStatus
+  priority: TaskPriority
+  createdAt: string
+}
+
+export interface Column {
+  id: TaskStatus
+  title: string
+  tasks: Task[]
 }
