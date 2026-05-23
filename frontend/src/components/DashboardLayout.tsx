@@ -17,11 +17,26 @@ export default function DashboardLayout({
 
   return (
     <div className="flex h-screen bg-gray-50">
-      <aside className="w-56 bg-white border-r border-gray-200
-                        flex flex-col">
+      <aside className="w-56 bg-white border-r border-gray-200 flex flex-col">
         <div className="p-6 border-b border-gray-200">
           <span className="font-bold text-gray-900">IntelliHub</span>
         </div>
+
+        <nav className="flex-1 p-4 space-y-1">
+          {navItems.map(item => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                ${location.pathname === item.path
+                  ? 'bg-blue-50 text-blue-600'
+                  : 'text-gray-600 hover:bg-gray-100'}`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
         <div className="p-4 border-t border-gray-200">
           <button onClick={logout}
             className="text-sm text-gray-500 hover:text-gray-700">
@@ -31,8 +46,7 @@ export default function DashboardLayout({
       </aside>
 
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-white border-b border-gray-200
-                           px-6 py-4 flex items-center justify-end">
+        <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-end">
           <span className="text-sm text-gray-600">
             {user?.name ?? 'User'}
           </span>
