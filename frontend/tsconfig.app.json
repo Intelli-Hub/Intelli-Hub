@@ -8,10 +8,7 @@
     "skipLibCheck": true,
 
     /* Path aliases */
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    },
+
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -21,6 +18,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+        "paths": {
+      "@/*": ["./src/*"]
+    },
     /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
