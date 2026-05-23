@@ -6,7 +6,7 @@ import type { Task, TaskStatus, TaskPriority} from '@/types'
 import TaskCard from '@/components/TaskCard'
 import AddTaskModal from '@/components/AddTaskModal'
 
-const [showModal, setShowModal] = useState(false)
+
 
 const COLUMNS: { id: TaskStatus; title: string }[] = [
   { id: 'todo',        title: 'To do'       },
@@ -23,7 +23,7 @@ const colStyles = {
 export default function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([])
   const [loading, setLoading] = useState(true)
-
+  const [showModal, setShowModal] = useState(false)
   useEffect(() => {
     getTasks().then(data => {
       setTasks(data); setLoading(false)
