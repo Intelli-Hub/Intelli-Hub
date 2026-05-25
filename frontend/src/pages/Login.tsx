@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '@/context/AuthContext'
+import toast from 'react-hot-toast'
 
 export default function Login() {
   const navigate = useNavigate()
+  const { login } = useAuth()
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -10,37 +13,20 @@ export default function Login() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!form.email || !form.password) {
-      setError('All fields required'); return
+      setError('All fields required')
+      return
     }
     setLoading(true)
-    try {
-      // TODO: await login(form) when backend ready
-      console.log('Login:', form)
-      navigate('/dashboard')
-    } catch {
-      setError('Invalid email or password')
-    } finally {
-      setLoading(false)
-    }
+    // TODO: replace with real API call when backend is ready
+    await new Promise(r => setTimeout(r, 800))
+    login(
+      { id: '1', name: 'Anshi Jain', email: form.email, createdAt: new Date().toISOString() },
+      'mock-token'
+    )
+    toast.success('Welcome back!')
+    navigate('/dashboard')
+    setLoading(false)
   }
-//   async function handleSubmit(e: React.FormEvent) {
-//   e.preventDefault()
-//   if (!form.email || !form.password) {
-//     setError('All fields required')
-//     return
-//   }
-//   setLoading(true)
-
-//   // Mock auth — remove this when backend is ready
-//   await new Promise(r => setTimeout(r, 800))
-//   login(
-//     { id: '1', name: 'Anshi Jain', email: form.email, createdAt: new Date().toISOString() },
-//     'mock-token'
-//   )
-//   navigate('/dashboard')
-
-//   setLoading(false)
-// }
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center

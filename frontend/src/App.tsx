@@ -11,10 +11,12 @@ import ProtectedRoute from '@/components/ProtectedRoute'
 import DashboardLayout from '@/components/DashboardLayout'
 import Chat from '@/pages/Chat'
 import Tasks from '@/pages/Tasks'
+import { Toaster } from 'react-hot-toast'
 
 export default function App() {
   return (
     <BrowserRouter>
+    <Toaster position="top-right" />
       <Navbar />  {/* ← sits above all routes */}
       <Routes>
         <Route path="/" element={<Landing />} />
