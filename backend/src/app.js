@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { config } from 'dotenv';
+import authRoutes from './routes/auth.js';
 
 config(); // load .env variables into process.env
 
@@ -32,6 +33,8 @@ app.get('/health', (req, res) => {
     environment: process.env.NODE_ENV,
   });
 });
+
+app.use('/api/auth', authRoutes);
 
 // ── 404 handler (catches any unmatched route) ────────────
 // Must come after all routes
