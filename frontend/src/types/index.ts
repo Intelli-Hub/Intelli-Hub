@@ -16,6 +16,7 @@ export interface Document {
   size: number
   uploadedAt: string
   status: DocumentStatus
+  fileUrl?: string  
 }
 
 export interface UploadResponse {

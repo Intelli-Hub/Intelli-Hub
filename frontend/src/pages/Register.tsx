@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-
-
+import { useAuth } from '@/context/AuthContext'
+import toast from 'react-hot-toast'
 
 export default function Register() {
   const navigate = useNavigate()
+  const { login } = useAuth()
   const [form, setForm] = useState({
     name: '', email: '', password: ''
   })
@@ -23,30 +24,17 @@ export default function Register() {
     const err = validate()
     if (err) { setError(err); return }
     setLoading(true)
-    try {
-      // TODO: await register(form) when backend ready
-      console.log('Register:', form)
-      navigate('/dashboard')
-    } catch {
-      setError('Registration failed. Try again.')
-    } finally {
-      setLoading(false)
-    }
+    // TODO: replace with real API call when backend is ready
+    await new Promise(r => setTimeout(r, 1000))
+    login(
+      { id: '1', name: form.name, email: form.email, createdAt: new Date().toISOString() },
+      'mock-token'
+    )
+    toast.success('Account created! Welcome to IntelliHub.')
+    navigate('/dashboard')
+    setLoading(false)
   }
-//   async function handleSubmit(e: React.FormEvent) {
-//   e.preventDefault()
-//   const err = validate()
-//   if (err) { setError(err); return }
-//   setLoading(true)
-//   // TODO: replace with real API call when backend is ready
-//   await new Promise(r => setTimeout(r, 1000))
-//   login(
-//     { id: '1', name: form.name, email: form.email, createdAt: new Date().toISOString() },
-//     'mock-token'
-//   )
-//   navigate('/dashboard')
-//   setLoading(false)
-// }
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center
                     justify-center px-4">
@@ -73,7 +61,7 @@ export default function Register() {
                        px-4 py-2.5 text-sm focus:outline-none
                        focus:ring-2 focus:ring-blue-500" />
           <input type="password" placeholder="Password"
-            value={form.email}
+            value={form.password}
             onChange={e => setForm({...form, password: e.target.value})}
             className="w-full border border-gray-300 rounded-lg
                        px-4 py-2.5 text-sm focus:outline-none
